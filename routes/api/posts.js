@@ -95,4 +95,30 @@ router.delete("/:post_id", auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/posts/:post_id/like
+// @desc    Like a post
+// @access  Private
+router.put("/:post_id/like", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post_id);
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    const like = post.likes.filter(
+      like => like.user.toString() === req.user.id
+    );
+    if (like.length === 0) {
+      post.likes.unshift({ user: req.user.id });
+    } else {
+      post.likes = post.likes.filter(
+        like => like.user.toString() !== req.user.id
+      );
+    }
+    await post.save();
+
+    res.json(post.likes);
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
+});
 module.exports = router;
