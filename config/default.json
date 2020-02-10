@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://O2hope_1:Cxy4N55N@expconnect-n1tdc.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "secretToken"
+  "jwtSecret": "secretToken",
+  "githubClientId": "a1668949c40a79437bf1",
+  "githubClientSecret": "37a5df48197bf6431505a66dab50875ae5cd9501"
 }
