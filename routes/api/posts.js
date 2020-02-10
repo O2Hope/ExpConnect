@@ -121,4 +121,80 @@ router.put("/:post_id/like", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route   POST api/posts/:post_id/comment
+// @desc    Add comment
+// @access  Private
+router.post(
+  "/:post_id/comment",
+  [auth, [check("text", "Text is required")]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ msg: errors.array() });
+    }
+
+    try {
+      const post = await Post.findById(req.params.post_id);
+      if (!post) {
+        return res.status(404).json({ msg: "Post not found" });
+      }
+      const user = await User.findById(req.user.id);
+
+      const comment = {
+        text: req.body.text,
+        user: user.id,
+        name: user.name,
+        avatar: user.avatar
+      };
+      post.comments.unshift(comment);
+      await post.save();
+
+      res.json(post.comments);
+    } catch (error) {
+      if (error.kind == "ObjectId") {
+        return res.status(400).json({ msg: "Invalid post" });
+      }
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// @route   DELETE api/posts/:post_id/comment/:comment_id
+// @desc    Delete comment
+// @access  Private
+router.delete("/:post_id/comment/:comment_id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post_id);
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+
+    const comment = post.comments.find(
+      comment => comment.id.toString() === req.params.comment_id
+    );
+
+    if (!comment) {
+      return res.status(404).json({ msg: "Comment not found" });
+    }
+
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Invalid operation" });
+    }
+
+    console.log("aqui");
+
+    post.comments = post.comments.filter(
+      comment => comment.id.toString() !== req.params.comment_id
+    );
+
+    await post.save();
+
+    res.json(post.comments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
