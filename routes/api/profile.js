@@ -119,14 +119,14 @@ router.get("/user/:user_id", async (req, res) => {
     }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
-      return res.status(400).json({ msg: "Profile not found" });
+      return res.status(404).json({ msg: "Profile not found" });
     }
 
     res.json(profile);
   } catch (error) {
     console.log(error);
     if (error.kind == "ObjectId") {
-      return res.status(400).json({ msg: "Profile not found" });
+      return res.status(404).json({ msg: "Profile not found" });
     }
     req.status(500).send("Server Error");
   }
@@ -208,7 +208,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
 
     if (profile.experience) {
       profile.experience = profile.experience.filter(
-        profileExp => profileExp._id != req.params.exp_id
+        profileExp => profileExp._id.toString() != req.params.exp_id
       );
     }
 
