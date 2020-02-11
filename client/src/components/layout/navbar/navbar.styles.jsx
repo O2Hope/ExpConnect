@@ -7,6 +7,7 @@ export const HeaderContainer = styled(Header)``;
 
 export const MenuContainer = styled(Menu)`
   line-height: 64px;
+  float: right;
 `;
 
 export const LogoContainer = styled.div`
