@@ -18,7 +18,10 @@ function App() {
             <Button type="primary">Hello world!</Button>
           </div>
         </Content>
-        <Footer>ExpConnect ©2020 Created by O2hope</Footer>
+        <Footer>
+          ExpConnect ©2020 Created by{" "}
+          <a href="https://github.com/O2Hope">O2hope</a>
+        </Footer>
       </Layout>
     </Fragment>
   );
