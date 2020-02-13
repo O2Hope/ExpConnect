@@ -6,6 +6,7 @@ import Layout from "./components/layout/layout/layout.component";
 
 import { Switch, Route } from "react-router-dom";
 import SignInPage from "./pages/sign-in/sign-in.component";
+import PeoplePage from "./pages/people/people.component";
 
 function App() {
   return (
@@ -15,11 +16,8 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/people" component={PeoplePage} />
         </Switch>
-        <Footer>
-          ExpConnect ©2020 Created by{" "}
-          <a href="https://github.com/O2Hope">O2hope</a>
-        </Footer>
       </Layout>
     </Fragment>
   );
