@@ -8,6 +8,30 @@ const PeopleList = () => (
     <PersonContainer xs={20} md={20} lg={18} xl={16}>
       <Person />
     </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
+    <PersonContainer xs={20} md={20} lg={18} xl={16}>
+      <Person />
+    </PersonContainer>
   </PeopleListContainer>
 );
 
